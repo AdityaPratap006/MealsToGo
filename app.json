@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Meals To Go",
-    "slug": "Meals To Go",
+    "slug": "meals_to_go",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
