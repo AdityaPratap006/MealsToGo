@@ -88,8 +88,8 @@ export default function App() {
                             inactiveTintColor: "gray",
                             style: {
                                 height: "8%",
-                                minHeight: 60,
-                                maxHeight: 80,
+                                minHeight: 90,
+                                maxHeight: 110,
                                 paddingVertical: 6,
                             },
                             labelStyle: {
