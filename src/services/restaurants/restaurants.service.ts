@@ -12,7 +12,7 @@ export const restaurantRequest = async (location = "51.219448,4.402464") => {
     });
 };
 
-export const restaurantsTransform = ({ results = [] }) => {
+export const restaurantsTransform = ({ results = [] }): Restaurant[] => {
     const restaurants: Restaurant[] = camelize(results);
     const mappedResults = restaurants.map((restaurant) => {
         return {

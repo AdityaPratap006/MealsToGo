@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { RestaurantScreen } from "./src/features/restaurants/screens/restaurants.screen";
 import { theme } from "./src/infrastructure/theme";
 import { SafeArea } from "./src/components/utility/safe-area.component";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -80,36 +81,38 @@ export default function App() {
     return (
         <React.Fragment>
             <ThemeProvider theme={theme}>
-                <NavigationContainer>
-                    <Tab.Navigator
-                        screenOptions={screenOptions}
-                        tabBarOptions={{
-                            activeTintColor: "tomato",
-                            inactiveTintColor: "gray",
-                            style: {
-                                height: "8%",
-                                minHeight: 90,
-                                maxHeight: 110,
-                                paddingVertical: 6,
-                            },
-                            labelStyle: {
-                                fontWeight: "500",
-                                fontSize: 12.75,
-                                marginBottom: 4,
-                            },
-                        }}
-                    >
-                        <Tab.Screen
-                            name="Restaurants"
-                            component={RestaurantScreen}
-                        />
-                        <Tab.Screen name="Map" component={MapScreen} />
-                        <Tab.Screen
-                            name="Settings"
-                            component={SettingsScreen}
-                        />
-                    </Tab.Navigator>
-                </NavigationContainer>
+                <RestaurantsContextProvider>
+                    <NavigationContainer>
+                        <Tab.Navigator
+                            screenOptions={screenOptions}
+                            tabBarOptions={{
+                                activeTintColor: "tomato",
+                                inactiveTintColor: "gray",
+                                style: {
+                                    height: "8%",
+                                    minHeight: 90,
+                                    maxHeight: 110,
+                                    paddingVertical: 6,
+                                },
+                                labelStyle: {
+                                    fontWeight: "500",
+                                    fontSize: 12.75,
+                                    marginBottom: 4,
+                                },
+                            }}
+                        >
+                            <Tab.Screen
+                                name="Restaurants"
+                                component={RestaurantScreen}
+                            />
+                            <Tab.Screen name="Map" component={MapScreen} />
+                            <Tab.Screen
+                                name="Settings"
+                                component={SettingsScreen}
+                            />
+                        </Tab.Navigator>
+                    </NavigationContainer>
+                </RestaurantsContextProvider>
             </ThemeProvider>
             <ExpoStatusBar style="auto" />
         </React.Fragment>

@@ -23,6 +23,8 @@ export interface Restaurant {
     vicinity: string;
     icon?: string;
     permanentlyClosed?: boolean;
+    isClosedTemporarily: boolean;
+    isOpenNow: boolean;
 }
 
 export enum BusinessStatus {
