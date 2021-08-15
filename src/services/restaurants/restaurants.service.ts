@@ -1,4 +1,5 @@
 import camelize from "camelize";
+import { BusinessStatus, Restaurant } from "../../models/restaurant";
 import { mocks } from "./mock";
 
 export const restaurantRequest = async (location = "51.219448,4.402464") => {
@@ -12,14 +13,15 @@ export const restaurantRequest = async (location = "51.219448,4.402464") => {
 };
 
 export const restaurantsTransform = ({ results = [] }) => {
-    const mappedResults = results.map((restaurant) => {
+    const restaurants: Restaurant[] = camelize(results);
+    const mappedResults = restaurants.map((restaurant) => {
         return {
             ...restaurant,
             isClosedTemporarily:
-                restaurant.business_status === "CLOSED_TEMPORARILY",
-            isOpenNow: restaurant.opening_hours?.open_now,
+                restaurant.businessStatus === BusinessStatus.ClosedTemporarily,
+            isOpenNow: restaurant.openingHours?.openNow,
         };
     });
 
-    return camelize(mappedResults);
+    return mappedResults;
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import starRatingSVG from "../../../../assets/star";
 import openSVG from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -14,7 +14,21 @@ import {
     SectionEnd,
 } from "./restaurant-info-card.styles";
 
-export const RestaurantInfoCard = ({ restaurant = {} }) => {
+interface RestaurantInfoCardProps {
+    restaurant?: {
+        name: string;
+        icon: string;
+        photos: string[];
+        address: string;
+        isOpenNow: boolean;
+        rating: number;
+        isClosedTemporarily: boolean;
+    };
+}
+
+export const RestaurantInfoCard: FC<RestaurantInfoCardProps> = ({
+    restaurant = {},
+}) => {
     const {
         name = "Some Restaurant",
         icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",

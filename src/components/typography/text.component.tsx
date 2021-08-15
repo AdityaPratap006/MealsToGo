@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { useTheme } from "styled-components/native";
+import React, { FC } from "react";
+import styled, { useTheme, DefaultTheme } from "styled-components/native";
 
-const defaultTextStyles = (theme) => `
+const defaultTextStyles = (theme: DefaultTheme) => `
   font-family: ${theme.fonts.body};
   font-weight: ${theme.fontWeights.regular};
   color: ${theme.colors.text.primary};
@@ -10,30 +10,30 @@ const defaultTextStyles = (theme) => `
   margin-bottom: 0px;
 `;
 
-const body = (theme) => `
+const body = (theme: DefaultTheme) => `
     font-size: ${theme.fontSizes.body};
 `;
 
-const hint = (theme) => `
+const hint = (theme: DefaultTheme) => `
     font-size: ${theme.fontSizes.body};
 `;
 
-const error = (theme) => `
+const error = (theme: DefaultTheme) => `
     color: ${theme.colors.text.error};
 `;
 
-const caption = (theme) => `
+const caption = (theme: DefaultTheme) => `
     font-size: ${theme.fontSizes.caption};
     font-weight: ${theme.fontWeights.bold};
 `;
 
-const label = (theme) => `
+const label = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights.medium};
 `;
 
-const title = (theme) => `
+const title = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.title};
 `;
@@ -47,12 +47,22 @@ const variants = {
     hint,
 };
 
-const CustomText = styled.Text`
+const CustomText = styled.Text<{
+    defaultStyles: string;
+    variantStyles: string;
+}>`
     ${({ defaultStyles }) => defaultStyles}
     ${({ variantStyles }) => variantStyles}
 `;
 
-export const TypographyText = ({ variant, children }) => {
+interface TypographyTextProps {
+    variant: keyof typeof variants;
+}
+
+export const TypographyText: FC<TypographyTextProps> = ({
+    variant,
+    children,
+}) => {
     const theme = useTheme();
     const defaultStyles = defaultTextStyles(theme);
     const variantStyles = variants[variant](theme);
