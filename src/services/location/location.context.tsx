@@ -39,6 +39,7 @@ export const LocationContextProvider: FC = ({ children }) => {
             setLocation(locationResult);
         } catch (err) {
             setError((err as Error).message);
+            console.log("Error Location Ctx: ", err.message);
         } finally {
             setLoading(false);
         }

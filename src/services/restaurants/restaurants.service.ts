@@ -1,15 +1,21 @@
 import camelize from "camelize";
 import { BusinessStatus, Restaurant } from "../../models/restaurant";
+import { ILocation } from "../location/location.mock";
 import { mocks } from "./mock";
 
-export const restaurantRequest = async (location = "51.219448,4.402464") => {
-    return new Promise((resolve, reject) => {
-        const mock = mocks[location];
-        if (!mock) {
-            reject({ message: "not found!" });
-        }
-        resolve(mock);
-    });
+export const restaurantRequest = async (location: ILocation) => {
+    if (!location) {
+        throw new Error("invalid coordinates");
+    }
+
+    const key = `${location.lat},${location.lng}`;
+    const mock = mocks[key];
+
+    if (!mock) {
+        throw new Error("not found");
+    }
+
+    return mock;
 };
 
 export const restaurantsTransform = ({ results = [] }): Restaurant[] => {

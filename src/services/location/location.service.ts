@@ -1,15 +1,14 @@
 import camelize from "camelize";
 import { ILocationsData, locations } from "./location.mock";
 
-export const locationRequest = (searchTerm: string) => {
-    return new Promise<ILocationsData>((resolve, reject) => {
-        const locationMock = locations[searchTerm];
-        if (!locationMock) {
-            reject("not found");
-        }
+export const locationRequest = async (searchTerm: string) => {
+    const locationMock = locations[searchTerm];
 
-        resolve(locationMock);
-    });
+    if (!locationMock) {
+        throw new Error("not found");
+    }
+
+    return locationMock;
 };
 
 export const locationTransform = (data: ILocationsData) => {

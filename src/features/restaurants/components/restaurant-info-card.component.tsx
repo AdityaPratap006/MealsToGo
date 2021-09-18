@@ -36,6 +36,7 @@ export const RestaurantInfoCard: FC<RestaurantInfoCardProps> = ({
         isOpenNow = true,
         rating = 4.2,
         isClosedTemporarily = true,
+        placeId,
     } = restaurant;
 
     const ratingArray = Array.from(new Array(Math.round(rating)));
@@ -53,7 +54,7 @@ export const RestaurantInfoCard: FC<RestaurantInfoCardProps> = ({
                 <Row>
                     {ratingArray.map((_, index) => (
                         <StarIcon
-                            key={index}
+                            key={`star-${placeId}-${index}`}
                             width={20}
                             height={20}
                             xml={starRatingSVG}
