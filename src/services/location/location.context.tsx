@@ -1,4 +1,4 @@
-import React, { useState, createContext, FC } from "react";
+import React, { useState, createContext, FC, useEffect } from "react";
 import { ILocation } from "./location.mock";
 import { locationRequest, locationTransform } from "./location.service";
 
@@ -24,26 +24,33 @@ export const LocationContextProvider: FC = ({ children }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>(null);
 
-    const onSearch = async (term: string | null) => {
-        if (!term || !term.length) {
+    const onSearch = async (searchTerm: string | null) => {
+        if (!searchTerm) {
             return;
         }
-        const searchTerm = term.toLowerCase();
 
         setLoading(true);
         setKeyword(searchTerm);
-
-        try {
-            const rawLocationsData = await locationRequest(searchTerm);
-            const locationResult = locationTransform(rawLocationsData);
-            setLocation(locationResult);
-        } catch (err) {
-            setError((err as Error).message);
-            console.log("Error Location Ctx: ", err.message);
-        } finally {
-            setLoading(false);
-        }
     };
+
+    useEffect(() => {
+        const getLocation = async () => {
+            try {
+                const rawLocationsData = await locationRequest(
+                    keyword.toLowerCase()
+                );
+                const locationResult = locationTransform(rawLocationsData);
+                setLocation(locationResult);
+            } catch (err) {
+                setError((err as Error).message);
+                console.log("Error Location Ctx: ", err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getLocation();
+    }, [keyword]);
 
     return (
         <LocationContext.Provider
