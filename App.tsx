@@ -3,7 +3,10 @@ import { View, Text } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+    BottomTabNavigationOptions,
+    createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import {
     useFonts as useOswaldFonts,
     Oswald_400Regular,
@@ -17,6 +20,7 @@ import { RestaurantScreen } from "./src/features/restaurants/screens/restaurants
 import { theme } from "./src/infrastructure/theme";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -55,7 +59,7 @@ const MapScreen = () => {
     );
 };
 
-const screenOptions = ({ route }) => {
+const screenOptions = ({ route }): BottomTabNavigationOptions => {
     const icon = TAB_ICON[route.name];
     return {
         tabBarIcon: ({ focused, color, size }) => {
@@ -81,38 +85,40 @@ export default function App() {
     return (
         <React.Fragment>
             <ThemeProvider theme={theme}>
-                <RestaurantsContextProvider>
-                    <NavigationContainer>
-                        <Tab.Navigator
-                            screenOptions={screenOptions}
-                            tabBarOptions={{
-                                activeTintColor: "tomato",
-                                inactiveTintColor: "gray",
-                                style: {
-                                    height: "8%",
-                                    minHeight: 90,
-                                    maxHeight: 110,
-                                    paddingVertical: 6,
-                                },
-                                labelStyle: {
-                                    fontWeight: "500",
-                                    fontSize: 12.75,
-                                    marginBottom: 4,
-                                },
-                            }}
-                        >
-                            <Tab.Screen
-                                name="Restaurants"
-                                component={RestaurantScreen}
-                            />
-                            <Tab.Screen name="Map" component={MapScreen} />
-                            <Tab.Screen
-                                name="Settings"
-                                component={SettingsScreen}
-                            />
-                        </Tab.Navigator>
-                    </NavigationContainer>
-                </RestaurantsContextProvider>
+                <LocationContextProvider>
+                    <RestaurantsContextProvider>
+                        <NavigationContainer>
+                            <Tab.Navigator
+                                screenOptions={screenOptions}
+                                tabBarOptions={{
+                                    activeTintColor: "tomato",
+                                    inactiveTintColor: "gray",
+                                    style: {
+                                        height: "8%",
+                                        minHeight: 90,
+                                        maxHeight: 110,
+                                        paddingVertical: 6,
+                                    },
+                                    labelStyle: {
+                                        fontWeight: "500",
+                                        fontSize: 12.75,
+                                        marginBottom: 4,
+                                    },
+                                }}
+                            >
+                                <Tab.Screen
+                                    name="Restaurants"
+                                    component={RestaurantScreen}
+                                />
+                                <Tab.Screen name="Map" component={MapScreen} />
+                                <Tab.Screen
+                                    name="Settings"
+                                    component={SettingsScreen}
+                                />
+                            </Tab.Navigator>
+                        </NavigationContainer>
+                    </RestaurantsContextProvider>
+                </LocationContextProvider>
             </ThemeProvider>
             <ExpoStatusBar style="auto" />
         </React.Fragment>
