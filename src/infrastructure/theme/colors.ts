@@ -1,9 +1,9 @@
 export interface ThemeColors {
-     brand: {
+    brand: {
         primary: string;
         secondary: string;
         muted: string;
-    },
+    };
     ui: {
         primary: string;
         secondary: string;
@@ -12,11 +12,11 @@ export interface ThemeColors {
         disabled: string;
         error: string;
         success: string;
-    },
+    };
     bg: {
         primary: string;
         secondary: string;
-    },
+    };
     text: {
         primary: string;
         secondary: string;
@@ -24,7 +24,7 @@ export interface ThemeColors {
         inverse: string;
         error: string;
         success: string;
-    },
+    };
 }
 
 export const colors: ThemeColors = {

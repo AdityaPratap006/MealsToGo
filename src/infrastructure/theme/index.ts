@@ -1,8 +1,15 @@
-import  { DefaultTheme } from 'styled-components';
+import { DefaultTheme } from "styled-components";
 import { colors, ThemeColors } from "./colors";
 import { space, lineHeights, ThemeSpace, ThemeLineHeights } from "./spacing";
 import { sizes, ThemeSizes } from "./sizes";
-import { fonts, fontWeights, fontSizes, ThemeFonts, ThemeFontSizes, ThemeFontWeights } from "./fonts";
+import {
+    fonts,
+    fontWeights,
+    fontSizes,
+    ThemeFonts,
+    ThemeFontSizes,
+    ThemeFontWeights,
+} from "./fonts";
 
 export interface AppTheme {
     colors: ThemeColors;
@@ -21,5 +28,5 @@ export const theme: DefaultTheme = {
     sizes,
     fonts,
     fontSizes,
-    fontWeights, 
+    fontWeights,
 };

@@ -1,7 +1,7 @@
 export interface ThemeFonts {
     body: string;
     heading: string;
-    monospace:  string;
+    monospace: string;
 }
 
 export interface ThemeFontWeights {
@@ -10,7 +10,7 @@ export interface ThemeFontWeights {
     bold: number;
 }
 
-export interface ThemeFontSizes  {
+export interface ThemeFontSizes {
     caption: string;
     button: string;
     body: string;
